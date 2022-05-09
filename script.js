@@ -180,6 +180,17 @@ const Keyboard = {
 
 
                     keyElement.addEventListener("click", () => {
+                    });
+
+                    break;
+
+                case "Shift":
+                    // keyElement.classList.add("keyboard__key--wide");
+                    keyElement.id = "Shift"//! COORECT THE ID INDEFECATOR
+                    keyElement.innerHTML = 'Shift';
+
+
+                    keyElement.addEventListener("click", () => {
                         // this.properties.value += "\n";
                         // this._triggerEvent("oninput");
                     });
@@ -254,7 +265,7 @@ const Keyboard = {
         this.properties.capsLock = !this.properties.capsLock;
 
         for (const key of this.elements.keys) {
-            if (key.childElementCount === 0) {
+            if (key.childElementCount === 0 ) {
                 key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
             }
         }
@@ -293,10 +304,23 @@ window.addEventListener("DOMContentLoaded", function () {
     Keyboard.init();
 
     window.addEventListener('keydown', event => {
-        console.log(event);
-        // Keyboard.elements.keys.forEach( key => {
-        //     console.log(key)
-        // })
+        //!console.log(event);
+        Keyboard.elements.keys.forEach( key => {
+
+            if (key.id == event.key){
+                key.classList.add('modify');
+            }
+        })
+    })
+
+    window.addEventListener('keyup', event => {
+
+        Keyboard.elements.keys.forEach( key => {
+
+            if (key.id == event.key){
+                key.classList.remove('modify');
+            }
+        })
 
     })
 
